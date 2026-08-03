@@ -6,9 +6,9 @@ import (
 	"server/internal/transport"
 )
 
-func New() http.Handler {
+func New( allowedOrigins []string ) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /solve", transport.HandleSolve)
-	return middleware.CORS(mux)
+	return middleware.CORS(mux, allowedOrigins)
 }
 
